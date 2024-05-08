@@ -1,0 +1,174 @@
+:root {
+  --rotation: 25deg;
+  --gap: 150px;
+}
+
+body {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, #eee 1px, transparent 1px),
+    linear-gradient(to bottom, #eee 1px, transparent 1px);
+  font-family: 'Nimbus Mono PS', 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.canvas {
+  position: absolute;
+  top: calc(50% - 150px);
+  left: calc(50% - 250px);
+  width: 500px;
+  height: 300px;
+  perspective: 2000px;
+  transform-style: preserve-3d;
+  perspective-origin: -10% -200%;
+}
+.canvas:has(.layer:hover) .layer {
+  opacity: 0.1;
+}
+.canvas:has(.layer:focus) .layer {
+  transform: rotateY(0) translateZ(0) !important;
+  opacity: 1;
+}
+.canvas:has(.layer:focus) .front {
+  display: block;
+  cursor: pointer;
+}
+
+.front {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.layer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border: 2px dashed;
+  transition: all 0.25s ease-out;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+}
+.layer:hover {
+  opacity: 1 !important;
+}
+.layer:focus ~ .layer {
+  opacity: 0 !important;
+}
+.layer:nth-child(1) {
+  background: linear-gradient(180deg, rgba(237,237,237,1) 0%, rgba(255,255,255,1) 100%);
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * -3));
+}
+.layer:nth-child(2) {
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * -2));
+}
+.layer:nth-child(3) {
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * -1));
+}
+.layer:nth-child(4) {
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * 0));
+}
+.layer:nth-child(5) {
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * 1));
+}
+.layer:nth-child(6) {
+  transform: rotateY(var(--rotation)) translateZ(calc(var(--gap) * 2));
+}
+.layer > span {
+  position: absolute;
+  right: 100%;
+  top: 25%;
+  margin-right: 30px;
+  background: white;
+  padding: 5px 10px;
+  border: 2px dashed;
+}
+.layer > div {
+  display: grid;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  grid-template-columns: 20% auto 20% 20%;
+  grid-template-rows: 10% auto auto 10%;
+  grid-gap: 2px;
+  padding: 2px;
+}
+
+.message {
+  position: absolute;
+  bottom: 150%;
+  left: 45%;
+}
+
+.layer-part {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 2px currentColor solid;
+  text-align: center;
+}
+
+.background {
+  background: linear-gradient(180deg, rgba(237,237,237,1) 0%, rgba(0,212,255,0) 100%);
+}
+
+.overlay {
+  background: rgba(0,0,0,0.3);
+}
+
+.content {
+  grid-column: 2 / end;
+  grid-row: 2 / end;
+  background: MistyRose;
+  color: PaleVioletRed;
+}
+
+.top-nav {
+  grid-column: 1 / end;
+  grid-row: 1 / 2;
+  background: MintCream;
+  color: LightSlateGray;
+}
+
+.left-nav {
+  grid-column: 1 / 2;
+  grid-row: 2 / end;
+  background: Linen;
+  color: Olive;
+}
+
+.sidesheet {
+  grid-column: 4 / end;
+  grid-row: 1 / end;
+  background: LavenderBlush;
+  color: MediumOrchid;
+}
+
+.modal {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  background: Cornsilk;
+  color: Chocolate;
+}
+
+.toast {
+  grid-column: 4 / end;
+  grid-row: 4 / 5;
+  background: Ivory;
+  color: MediumSeaGreen;
+  transform: translate(-10px, -10px)
+}
+
+.popover {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+  background: GhostWhite;
+  color: LightSlateGray;
+  transform: translate(-10px, 10px);
+}
